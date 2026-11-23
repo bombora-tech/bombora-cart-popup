@@ -36,7 +36,7 @@ return array(
 		'Installed version' => 'Nainstalovaná verze',
 		'Integrity check' => 'Kontrola integrity',
 		'Latest release' => 'Poslední vydání',
-		'Leave empty to use the built-in translation for each language (EN, NL, CS, SK, DE, FR). Custom texts can be translated in WPML → String Translation (domain admin_texts_bcp_settings).' => 'Ponechte prázdné pro vestavěný překlad každého jazyka (EN, NL, CS, SK, DE, FR). Vlastní texty lze přeložit ve WPML → String Translation (doména admin_texts_bcp_settings).',
+		'Leave empty to use the built-in translation for each language (EN, NL, CS, SK, DE, FR, RU). Custom texts can be translated in WPML → String Translation (domain admin_texts_bcp_settings).' => 'Ponechte prázdné pro vestavěný překlad každého jazyka (EN, NL, CS, SK, DE, FR, RU). Vlastní texty lze přeložit ve WPML → String Translation (doména admin_texts_bcp_settings).',
 		'Maximum width (px)' => 'Maximální šířka (px)',
 		'Not set – only needed for a private repository' => 'Nenastaven – potřeba jen pro privátní repozitář',
 		'Number of products' => 'Počet produktů',

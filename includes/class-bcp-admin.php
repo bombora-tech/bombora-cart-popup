@@ -204,7 +204,7 @@ final class Admin {
 
 					<section class="bcp-card bcp-card--wide">
 						<h2><?php esc_html_e( 'Texts', 'bombora-cart-popup' ); ?></h2>
-						<p class="description"><?php esc_html_e( 'Leave empty to use the built-in translation for each language (EN, NL, CS, SK, DE, FR). Custom texts can be translated in WPML → String Translation (domain admin_texts_bcp_settings).', 'bombora-cart-popup' ); ?></p>
+						<p class="description"><?php esc_html_e( 'Leave empty to use the built-in translation for each language (EN, NL, CS, SK, DE, FR, RU). Custom texts can be translated in WPML → String Translation (domain admin_texts_bcp_settings).', 'bombora-cart-popup' ); ?></p>
 						<div class="bcp-grid">
 							<?php
 							$labels = array(

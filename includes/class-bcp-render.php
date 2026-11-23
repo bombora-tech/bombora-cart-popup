@@ -149,6 +149,26 @@ final class Render {
 		return (string) ob_get_clean();
 	}
 
+	/**
+	 * Lze produkt přidat jedním klikem bez výběru možností?
+	 * Jednoduchý produkt, nebo WPC bundle s pevnými položkami (bez variant a volitelných položek) –
+	 * stejné pravidlo, jaké používá WPC Product Bundles pro tlačítko ve výpisu.
+	 */
+	public static function can_add_directly( \WC_Product $p ): bool {
+		if ( ! $p->supports( 'ajax_add_to_cart' ) || ! $p->is_purchasable() || ! $p->is_in_stock() ) {
+			return false;
+		}
+		if ( $p->is_type( 'simple' ) ) {
+			return true;
+		}
+		if ( $p->is_type( 'woosb' ) ) {
+			$variables = method_exists( $p, 'has_variables' ) ? (bool) $p->has_variables() : true;
+			$optional  = method_exists( $p, 'has_optional' ) ? (bool) $p->has_optional() : true;
+			return ! $variables && ! $optional;
+		}
+		return false;
+	}
+
 	public static function related( int $product_id ): string {
 		$products = Related::get( $product_id );
 		if ( empty( $products ) ) {
@@ -166,7 +186,7 @@ final class Render {
 							<span class="bcp-rel__name"><?php echo esc_html( $p->get_name() ); ?></span>
 						</a>
 						<span class="bcp-rel__price"><?php echo wp_kses_post( $p->get_price_html() ); ?></span>
-						<?php if ( $p->is_type( 'simple' ) && $p->supports( 'ajax_add_to_cart' ) ) : ?>
+						<?php if ( self::can_add_directly( $p ) ) : ?>
 							<button type="button" class="bcp-btn bcp-rel__add" data-product="<?php echo esc_attr( (string) $p->get_id() ); ?>"><?php echo esc_html( $p->add_to_cart_text() ); ?></button>
 						<?php else : ?>
 							<a class="bcp-btn bcp-rel__add" href="<?php echo esc_url( $p->get_permalink() ); ?>"><?php echo esc_html( $p->add_to_cart_text() ); ?></a>

@@ -2,7 +2,14 @@
 
 Formát podle [Keep a Changelog](https://keepachangelog.com/cs/), verze podle [SemVer](https://semver.org/lang/cs/).
 
-## [1.1.0] - 2026-11-23
+## [1.2.0] - 2026-11-23
+
+### Opraveno
+- Doporučené produkty: WPC bundle s pevnými položkami (bez variant a volitelných položek) jde přidat do košíku přímo z pop-upu – dříve tlačítko vedlo na stránku bundlu. Bundly s výběrem dál odkazují na detail.
+
+### Přidáno
+- Ruský překlad frontendu (`ru_RU`) – zgruzie.cz/ru.
+ - 2026-11-23
 
 ### Změněno
 - Plugin je modulem **Bombora Manageru**: menu Bombora → Pop-up košík, aktualizace, instalace a přehled spravuje Manager.
