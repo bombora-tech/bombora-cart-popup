@@ -1,0 +1,11 @@
+<wpml-config>
+	<admin-texts>
+		<key name="bcp_settings">
+			<key name="txt_heading"/>
+			<key name="txt_related"/>
+			<key name="txt_view_cart"/>
+			<key name="txt_checkout"/>
+			<key name="txt_continue"/>
+		</key>
+	</admin-texts>
+</wpml-config>
