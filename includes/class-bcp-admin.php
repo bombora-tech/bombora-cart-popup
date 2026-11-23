@@ -16,13 +16,11 @@ final class Admin {
 	public const PARENT    = 'bombora';
 	public const PAGE      = 'bombora-cart-popup';
 	public const GROUP     = 'bcp_settings_group';
-	private const CHECK_ACTION = 'bcp_check_updates';
 
 	public static function init(): void {
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'register' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
-		add_action( 'admin_post_' . self::CHECK_ACTION, array( __CLASS__, 'check_updates' ) );
 		add_filter( 'plugin_action_links_' . BCP_BASENAME, array( __CLASS__, 'action_links' ) );
 	}
 
@@ -84,18 +82,6 @@ final class Admin {
 		$url = admin_url( 'admin.php?page=' . self::PAGE );
 		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'bombora-cart-popup' ) . '</a>' );
 		return $links;
-	}
-
-	public static function check_updates(): void {
-		if ( ! current_user_can( 'update_plugins' ) ) {
-			wp_die( esc_html__( 'You are not allowed to do this.', 'bombora-cart-popup' ), 403 );
-		}
-		check_admin_referer( self::CHECK_ACTION );
-		Updater::clear_cache();
-		delete_site_transient( 'update_plugins' );
-		wp_update_plugins();
-		wp_safe_redirect( add_query_arg( array( 'page' => self::PAGE, 'bcp-checked' => '1' ), admin_url( 'admin.php' ) ) . '#bcp-updates' );
-		exit;
 	}
 
 	public static function render_overview(): void {
@@ -249,43 +235,16 @@ final class Admin {
 	}
 
 	private static function render_updates(): void {
-		$info    = Updater::latest( false );
-		$latest  = is_array( $info ) ? (string) $info['version'] : '';
-		$checked = isset( $_GET['bcp-checked'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- jen zobrazení hlášky.
+		$manager = defined( 'BOMBORA_MANAGER_VERSION' );
 		?>
 		<section class="bcp-card bcp-card--wide" id="bcp-updates">
 			<h2><?php esc_html_e( 'Updates', 'bombora-cart-popup' ); ?></h2>
-			<table class="bcp-kv">
-				<tr><th><?php esc_html_e( 'Installed version', 'bombora-cart-popup' ); ?></th><td><code><?php echo esc_html( BCP_VERSION ); ?></code></td></tr>
-				<tr><th><?php esc_html_e( 'Latest release', 'bombora-cart-popup' ); ?></th><td>
-					<?php if ( '' !== $latest ) : ?>
-						<code><?php echo esc_html( $latest ); ?></code>
-						<?php if ( version_compare( $latest, BCP_VERSION, '>' ) ) : ?>
-							<span class="bcp-badge bcp-badge--warn"><?php esc_html_e( 'Update available', 'bombora-cart-popup' ); ?></span>
-						<?php else : ?>
-							<span class="bcp-badge bcp-badge--ok"><?php esc_html_e( 'Up to date', 'bombora-cart-popup' ); ?></span>
-						<?php endif; ?>
-					<?php else : ?>
-						<span class="bcp-badge bcp-badge--warn"><?php esc_html_e( 'Could not be checked', 'bombora-cart-popup' ); ?></span>
-						<?php $err = Updater::last_error(); ?>
-						<?php if ( '' !== $err ) : ?>
-							<span class="description"><?php echo esc_html( $err ); ?></span>
-						<?php endif; ?>
-					<?php endif; ?>
-				</td></tr>
-				<tr><th><?php esc_html_e( 'Repository', 'bombora-cart-popup' ); ?></th><td><code><?php echo esc_html( Updater::repo() ); ?></code></td></tr>
-				<tr><th><?php esc_html_e( 'Access token', 'bombora-cart-popup' ); ?></th><td><?php echo Updater::has_token() ? esc_html__( 'Set in wp-config.php (BOMBORA_GITHUB_TOKEN)', 'bombora-cart-popup' ) : esc_html__( 'Not set – only needed for a private repository', 'bombora-cart-popup' ); ?></td></tr>
-				<tr><th><?php esc_html_e( 'Integrity check', 'bombora-cart-popup' ); ?></th><td><?php esc_html_e( 'Every update ZIP is verified with SHA-256 before installation.', 'bombora-cart-popup' ); ?></td></tr>
-			</table>
-			<?php if ( current_user_can( 'update_plugins' ) ) : ?>
-				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-					<input type="hidden" name="action" value="<?php echo esc_attr( self::CHECK_ACTION ); ?>">
-					<?php wp_nonce_field( self::CHECK_ACTION ); ?>
-					<?php submit_button( __( 'Check for updates now', 'bombora-cart-popup' ), 'secondary', 'submit', false ); ?>
-					<?php if ( $checked ) : ?>
-						<span class="bcp-checked"><?php esc_html_e( 'Checked.', 'bombora-cart-popup' ); ?></span>
-					<?php endif; ?>
-				</form>
+			<?php if ( $manager ) : ?>
+				<p><?php esc_html_e( 'Updates are managed by Bombora Manager (verified with SHA-256).', 'bombora-cart-popup' ); ?>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=bombora' ) ); ?>"><?php esc_html_e( 'Open Bombora → Modules', 'bombora-cart-popup' ); ?></a></p>
+			<?php else : ?>
+				<p class="bcp-warn"><?php esc_html_e( 'Install Bombora Manager to receive automatic updates of this plugin.', 'bombora-cart-popup' ); ?>
+					<a href="https://github.com/bombora-tech/bombora-manager/releases/latest" target="_blank" rel="noopener noreferrer">github.com/bombora-tech/bombora-manager</a></p>
 			<?php endif; ?>
 		</section>
 		<?php

@@ -2,6 +2,15 @@
 
 Formát podle [Keep a Changelog](https://keepachangelog.com/cs/), verze podle [SemVer](https://semver.org/lang/cs/).
 
+## [1.1.0] - 2026-11-23
+
+### Změněno
+- Plugin je modulem **Bombora Manageru**: menu Bombora → Pop-up košík, aktualizace, instalace a přehled spravuje Manager.
+- Repozitář přesunut na `bombora-tech/bombora-cart-popup` (veřejný) – na webech není potřeba nic konfigurovat.
+
+### Odstraněno
+- Vlastní updater a konstanty `BOMBORA_CART_POPUP_REPO` / `BOMBORA_GITHUB_TOKEN` (aktualizace řeší Manager se stejnou SHA-256 kontrolou).
+
 ## [1.0.0] - 2026-11-23
 
 ### Přidáno

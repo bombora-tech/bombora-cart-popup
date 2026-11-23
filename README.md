@@ -7,18 +7,13 @@ Rychlý a bezpečný pop-up košík pro WooCommerce (Bombora group s.r.o.). Náh
 - Nastavení: **Bombora → Pop-up košík**.
 
 ## Instalace
-1. Stáhněte `bombora-cart-popup.zip` z [Releases](../../releases) a nahrajte v *Pluginy → Přidat nový → Nahrát*.
-2. Pro **privátní** repozitář přidejte do `wp-config.php`:
-   ```php
-   define( 'BOMBORA_GITHUB_TOKEN', 'github_pat_…' ); // fine-grained token: jen tento repozitář, Contents = Read-only
-   ```
-3. Jiný repozitář (fork): `define( 'BOMBORA_CART_POPUP_REPO', 'owner/repo' );`
+Nainstalujte **Bombora Manager** (https://github.com/bombora-tech/bombora-manager/releases) a v *Bombora → Moduly* klikněte u Pop-up košíku na *Instalovat* → *Aktivovat*. Nic se nekonfiguruje ve wp-config.
 
 ## Vydání nové verze
 1. Zvyšte verzi v hlavičce `bombora-cart-popup.php` **i** v `BCP_VERSION`.
 2. Doplňte sekci do `CHANGELOG.md`.
 3. `git tag vX.Y.Z && git push --tags` → GitHub Action sestaví ZIP + `.sha256` a vytvoří Release.
-4. Weby uvidí aktualizaci do 6 h (nebo ihned: *Bombora → Pop-up košík → Zkontrolovat aktualizace*).
+4. Weby uvidí aktualizaci do 6 h (nebo ihned: *Bombora → Moduly → Zkontrolovat aktualizace*).
 
 Ručně: `./build.sh` → `dist/`.
 
@@ -30,7 +25,7 @@ Ručně: `./build.sh` → `dist/`.
 | Vstupy | `absint`, regex na klíč košíku (`^[a-f0-9]{32}$`), limity množství. |
 | Výstup | `esc_html` / `esc_attr` / `esc_url` / `wp_kses_post`; JS vkládá texty přes `textContent`. |
 | Nastavení | Jen `manage_options`, Settings API (nonce), whitelist klíčů, shortcode pole přijme jen registrované shortcody. |
-| Aktualizace | Jen HTTPS a povolení hostitelé GitHubu, SHA-256 kontrola ZIPu (`hash_equals`), token jen z `wp-config.php`, hlavička `Update URI`. |
+| Aktualizace | Bombora Manager: jen HTTPS a povolení hostitelé GitHubu, SHA-256 + kontrola struktury ZIPu, hlavička `Update URI`. |
 
 ## Filtry
 - `bcp_should_load` (bool) – vypnout načítání na konkrétních stránkách.
