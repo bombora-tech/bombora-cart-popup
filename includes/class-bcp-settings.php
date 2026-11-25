@@ -35,7 +35,7 @@ final class Settings {
 			'show_checkout'    => 0,
 			'shortcode'        => '',
 			'related_count'    => 3,
-			'related_source'   => 'smart', // smart | cross | category | none.
+			'related_source'   => 'cross_category', // cross_category | smart | cross | category | none.
 			'accent'           => '#6da305',
 			'radius'           => 8,
 			'max_width'        => 760,
@@ -121,7 +121,7 @@ final class Settings {
 
 		$out['show_mode'] = in_array( $input['show_mode'] ?? '', array( 'added', 'cart' ), true ) ? $input['show_mode'] : $defaults['show_mode'];
 
-		$out['related_source'] = in_array( $input['related_source'] ?? '', array( 'smart', 'cross', 'category', 'none' ), true ) ? $input['related_source'] : $defaults['related_source'];
+		$out['related_source'] = in_array( $input['related_source'] ?? '', array( 'cross_category', 'smart', 'cross', 'category', 'none' ), true ) ? $input['related_source'] : $defaults['related_source'];
 		$out['related_count']  = max( 0, min( 8, absint( $input['related_count'] ?? $defaults['related_count'] ) ) );
 
 		$accent        = sanitize_hex_color( (string) ( $input['accent'] ?? '' ) );

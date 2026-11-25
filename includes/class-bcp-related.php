@@ -1,6 +1,6 @@
 <?php
 /**
- * Doporučené produkty do popupu (cross-sell → upsell → stejná kategorie), WPML-aware, s cache.
+ * Doporučené produkty do popupu (cross-sell → [upsell] → stejná kategorie, podle nastavení), WPML-aware, s cache.
  *
  * @package Bombora\CartPopup
  */
@@ -86,7 +86,7 @@ final class Related {
 		}
 
 		$ids = array();
-		if ( in_array( $source, array( 'smart', 'cross' ), true ) ) {
+		if ( in_array( $source, array( 'smart', 'cross', 'cross_category' ), true ) ) {
 			$ids = array_merge( $ids, $base->get_cross_sell_ids() );
 			if ( 'smart' === $source ) {
 				$ids = array_merge( $ids, $base->get_upsell_ids() );
@@ -104,7 +104,7 @@ final class Related {
 			)
 		);
 
-		if ( count( $ids ) < self::POOL_SIZE && in_array( $source, array( 'smart', 'category' ), true ) ) {
+		if ( count( $ids ) < self::POOL_SIZE && in_array( $source, array( 'smart', 'cross_category', 'category' ), true ) ) {
 			$cat_slugs = array();
 			foreach ( $base->get_category_ids() as $term_id ) {
 				$term = get_term( (int) $term_id, 'product_cat' );

@@ -174,6 +174,7 @@ final class Admin {
 							<label for="bcp-related_source"><?php esc_html_e( 'Source', 'bombora-cart-popup' ); ?></label>
 							<select id="bcp-related_source" name="<?php echo esc_attr( $name ); ?>[related_source]">
 								<option value="smart" <?php selected( $s['related_source'], 'smart' ); ?>><?php esc_html_e( 'Cross-sells → upsells → same category', 'bombora-cart-popup' ); ?></option>
+								<option value="cross_category" <?php selected( $s['related_source'], 'cross_category' ); ?>><?php esc_html_e( 'Cross-sells → same category (no upsells)', 'bombora-cart-popup' ); ?></option>
 								<option value="cross" <?php selected( $s['related_source'], 'cross' ); ?>><?php esc_html_e( 'Cross-sells only', 'bombora-cart-popup' ); ?></option>
 								<option value="category" <?php selected( $s['related_source'], 'category' ); ?>><?php esc_html_e( 'Same category only', 'bombora-cart-popup' ); ?></option>
 								<option value="none" <?php selected( $s['related_source'], 'none' ); ?>><?php esc_html_e( 'Do not show', 'bombora-cart-popup' ); ?></option>

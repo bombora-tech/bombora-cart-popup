@@ -19,6 +19,7 @@ return array(
 		'Continue shopping' => 'Pokračovat v nákupu',
 		'Corner radius (px)' => 'Zaoblení rohů (px)',
 		'Could not be checked' => 'Nelze ověřit',
+		'Cross-sells → same category (no upsells)' => 'Cross-sell → stejná kategorie (bez upsellů)',
 		'Cross-sells only' => 'Jen křížový prodej (cross-sell)',
 		'Cross-sells → upsells → same category' => 'Cross-sell → upsell → stejná kategorie',
 		'Customers also bought' => 'Ostatní zákazníci také koupili',

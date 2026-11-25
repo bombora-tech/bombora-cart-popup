@@ -2,6 +2,14 @@
 
 Formát podle [Keep a Changelog](https://keepachangelog.com/cs/), verze podle [SemVer](https://semver.org/lang/cs/).
 
+## [1.3.0] - 2026-11-25
+
+### Přidáno
+- Zdroj doporučených produktů **„Cross-sell → stejná kategorie (bez upsellů)“** (`cross_category`). Up-selly se v e-shopech používají pro varianty balení (Bombora Manager → Varianty balení), proto nepatří do pop-upu.
+
+### Změněno
+- Výchozí zdroj pro nové instalace: `cross_category` (dříve `smart`). Uložené nastavení webů se nemění.
+
 ## [1.2.0] - 2026-11-23
 
 ### Opraveno

@@ -3,7 +3,7 @@
  * Plugin Name:       Bombora Cart Popup
  * Plugin URI:        https://github.com/bombora-tech/bombora-cart-popup
  * Description:       Rychlý a bezpečný pop-up košík pro WooCommerce: zobrazí přidaný produkt, změnu množství s okamžitým přepočtem, shortcode (např. WPify lišta dopravy zdarma) a doporučené produkty. Kompatibilní s WPML/WCML a WPC Product Bundles.
- * Version:           1.2.0
+ * Version:           1.3.0
  * Requires at least: 6.5
  * Requires PHP:      8.0
  * Author:            Bombora group s.r.o.
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'BCP_VERSION', '1.2.0' );
+define( 'BCP_VERSION', '1.3.0' );
 define( 'BCP_FILE', __FILE__ );
 define( 'BCP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BCP_URL', plugin_dir_url( __FILE__ ) );
